@@ -1,4 +1,4 @@
-"""This program uses a text file, GasPrices.txt, which has the weekly average gas prices between April 1993 and August 2013. This program takes that information and returns the average price per year.
+"""This program reads a text file, GasPrices.txt, which has the weekly average gas prices between April 1993 and August 2013. This program takes that information and returns the average price per year.
 
 Programmer: David Weinstein
 Date: 10/30/2019
@@ -7,23 +7,31 @@ File name: average_price_per_year_weinstein.py
 Pseudocode:
 1.
 """
+import math
 
-def organize(f):
-    openFile = open(f, 'r')
-    lines = openFile.readlines()
-    lyst = []
-    for line in lines:
-        splitLines = line.split(':')
-        dates = splitLines[0].split('-')
-        prices = float(splitLines[1])
-        if dates[2] == '2013':
-            lyst.append(prices)
-    return lyst
+YEARS = ['1993','1994','1995','1996']
 
-# def average(list):
-
-def main():
-    print(organize("../GasPrices.txt"))
-
-if __name__ == "__main__":
-    main()
+gasFile = open("../GasPrices.txt", 'r')
+lines = gasFile.readlines()
+splitLines = []
+for line in lines:
+    splitLines.append(line.split(':'))
+yearlyPrices = []
+date = ''
+price = ''
+for ele in splitLines:
+    date = ele[0]
+    price = float(ele[1])
+count = 0
+while count < len(YEARS):
+    if YEARS[count] in date:
+        yearlyPrices.append(price)
+        avg = "%.2f" % (sum(yearlyPrices) / len(yearlyPrices))
+        print(avg)
+    count += 1
+    
+# print(len(YEARS))
+# print(YEARS)
+# print(ninetyThree)
+# print("%.2f" % (sum(ninetyThree) / len(ninetyThree)))
+# print(splitLines)
