@@ -1,0 +1,42 @@
+"""This program uses the text file GasPrices.txt, which has the weekly average gas prices from April 1993 to August 2013. This program uses that data and returns the average price of gas per month.
+
+Programmer: David Weinstein
+Date: 11/1/2019
+File name: average_price_per_month_weinstein.py
+
+Pseudocode:
+"""
+
+MONTHS = {'01':'January', '02':'February', '03':'March', '04':'April', '05':'May', '06':'June', '07':'July', '08':'August', '09':'September', '10':'October', '11':'November', '12':'December'}
+YEARS = ['1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
+
+def manageGasFile(f):
+    gasFile = open(f, 'r')
+    lines = gasFile.readlines()
+    splitLines(lines)
+
+def splitLines(lyst):
+    newList = []
+    for line in lyst:
+        newList.append(line.split(':'))
+    for ele in newList:
+        date = ele[0]
+        splitDate = date.split('-')
+        month = splitDate[0]
+        year = splitDate[-1]
+        price = float(ele[1])
+        newList = [MONTHS[month], year, price]
+        countAvg(newList)
+
+def countAvg(lyst):
+    total = 0.0
+    price = float(lyst[-1])
+    for ele in lyst:
+        total += price
+        print(total) 
+
+def main():
+    manageGasFile("../GasPrices.txt")
+
+if __name__ == "__main__":
+    main()
