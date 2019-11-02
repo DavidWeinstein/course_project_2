@@ -34,25 +34,23 @@ def countAvg(lyst):
     mnthIdx = 3
     yrIdx = 0
     sumList = []
-    avgList = []
     while count < len(lyst):
         month = lyst[count][0]
         year = lyst[count][1]
         price = float(lyst[count][2])
         if month == MONTHS[mnthIdx] and year == YEARS[yrIdx]:
             sumList.append(price)
-            avg = float(sum(sumList) / len(sumList))
-            avgList.append(avg)
+            avg = sum(sumList) / len(sumList)
         else:
+            count = count - 1
             print("Average price for "+ MONTHS_TO_TEXT[MONTHS[mnthIdx]]+", "+ YEARS[yrIdx] + ": $" + "%.2f" % avg)
-            mnthIdx += 1
             sumList = []
+            mnthIdx += 1
             if mnthIdx == len(MONTHS):
                 yrIdx += 1
                 mnthIdx = 0
-            if yrIdx == len(YEARS):
-                break
         count += 1
+    print("Average price for "+ MONTHS_TO_TEXT[MONTHS[mnthIdx]]+", "+ YEARS[yrIdx] + ": $" + "%.2f" % avg)
 
 def main():
     manageGasFile("../GasPrices.txt")
