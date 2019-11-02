@@ -6,7 +6,7 @@ File name: average_price_per_month_weinstein.py
 
 Pseudocode:
 """
-MONTHS = ['04', '05', '06', '07', '08', '09', '10', '11', '12', '01', '02', '03']
+MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 MONTHS_TO_TEXT = {'01':'January', '02':'February', '03':'March', '04':'April', '05':'May', '06':'June', '07':'July', '08':'August', '09':'September', '10':'October', '11':'November', '12':'December'}
 YEARS = ['1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
 
@@ -30,17 +30,29 @@ def splitLines(lyst):
     countAvg(mainList)
 
 def countAvg(lyst):
-    total = 0.0
     count = 0
+    mnthIdx = 3
+    yrIdx = 0
+    sumList = []
     avgList = []
-    for ele in lyst:
-        if ele[0] == MONTHS[0] and ele[1] == YEARS[0]:
-            avgList.append(ele[2])
-            avg = sum(avgList) / len(avgList)
-    print(avg)
-
-
-            
+    while count < len(lyst):
+        month = lyst[count][0]
+        year = lyst[count][1]
+        price = float(lyst[count][2])
+        if month == MONTHS[mnthIdx] and year == YEARS[yrIdx]:
+            sumList.append(price)
+            avg = float(sum(sumList) / len(sumList))
+            avgList.append(avg)
+        else:
+            print("Average price for "+ MONTHS_TO_TEXT[MONTHS[mnthIdx]]+", "+ YEARS[yrIdx] + ": $" + "%.2f" % avg)
+            mnthIdx += 1
+            sumList = []
+            if mnthIdx == len(MONTHS):
+                yrIdx += 1
+                mnthIdx = 0
+            if yrIdx == len(YEARS):
+                break
+        count += 1
 
 def main():
     manageGasFile("../GasPrices.txt")
