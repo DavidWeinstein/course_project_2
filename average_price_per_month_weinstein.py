@@ -9,11 +9,11 @@ Pseudocode:
 2. Open the file and put into list of lines
 3.Split lines into list of date and price
     3a.Split date into month, day, year to access month and year
-    3b.Populate list of month, year, price to calculate average price per month
+    3b.Populate list with month, year, price to calculate average price per month
 4.Loop through list checking each sublist
     4a.If price is in month and year, populate list to average
     4b.Else print the desired output for month, set count to count - 1 to not skip any list, reset the average list, and index the month
-        4b.1Check if we are atthe last month, if we are reset month index and index through to the next year
+        4b.1Check if we are at the last month, if we are reset month index and index through to the next year
     4c.Print last output for last month in text file
 """
 # Constants for months, years, and months to text dictionary.
@@ -45,9 +45,9 @@ def splitLines(lyst):
         price = float(ele[1])
         #Populate main workable list of lists in month, year, price format
         mainList.append([month, year, price])
-    countAvg(mainList)
+    calcAvg(mainList)
 
-def countAvg(lyst):
+def calcAvg(lyst):
     """Calculates and outputs average price per gallon for each month from April, 1993 to August 2013"""
     #Set up counter for while loop, month index to iterate through months strarting at index 3, year index to iterate through all the years, and empty list for calculating the average
     count = 0
@@ -65,7 +65,7 @@ def countAvg(lyst):
             avgList.append(price)
             avg = sum(avgList) / len(avgList)
         else:
-            #Else make count equal to current count - 1, so we don't skip over the first week in each month, print desired outout, reset average list to an empty list, and iterate the month index to check next month
+            #Else make count equal to current count - 1, so we don't skip over the first week in each month, print desired output, reset average list to an empty list, and iterate the month index to check next month
             count = count - 1
             print("Average price for "+ MONTHS_TO_TEXT[MONTHS[mnthIdx]]+", "+ YEARS[yrIdx] + ": $" + "%.2f" % avg)
             avgList = []
