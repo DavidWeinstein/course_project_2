@@ -35,7 +35,7 @@ def manageGasFile(f):
         price = float(ele[1])
         YEARS_PRICE[year] += price
         YEARS_COUNT[year] += 1
-    # take the average by taking the value from the years_price dictionary, and dividing by the value in the years_count dictionary for each key, pint the results
+    # take the average by taking the value from the years_price dictionary, and dividing by the value in the years_count dictionary for each key, print the results
     count = 0
     while count < len(YEARS_PRICE):
         for key in YEARS_PRICE:
